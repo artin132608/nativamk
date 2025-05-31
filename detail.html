@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Nativa - Historical Details</title>
+    <meta name="description" content="Detailed information about historical places and figures in North Macedonia">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Additional styles for detail page */
+        .detail-hero {
+            margin-top: 80px;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--primary-red) / 0.05) 100%);
+        }
+
+        .detail-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            align-items: center;
+        }
+
+        .detail-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .detail-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .detail-info h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: hsl(var(--text-primary));
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .detail-subtitle {
+            color: hsl(var(--heritage-gold));
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            padding: var(--spacing-md);
+            background-color: hsl(var(--background));
+            border-radius: var(--radius-md);
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            color: hsl(var(--heritage-gold));
+            font-size: 1.2rem;
+        }
+
+        .star.empty {
+            color: hsl(var(--border));
+        }
+
+        .rating-text {
+            color: hsl(var(--text-secondary));
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: hsl(var(--primary-red));
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: var(--spacing-lg);
+            transition: color var(--transition-fast);
+        }
+
+        .back-button:hover {
+            color: hsl(var(--primary-red) / 0.8);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .detail-item {
+            background-color: hsl(var(--background));
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: hsl(var(--text-primary));
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .detail-value {
+            color: hsl(var(--text-secondary));
+        }
+
+        .reviews-section, .comments-section {
+            padding: var(--spacing-2xl) 0;
+        }
+
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+            margin: var(--spacing-2xl) 0;
+        }
+
+        .review-form, .comment-form {
+            background-color: hsl(var(--surface));
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: hsl(var(--text-primary));
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 2px solid hsl(var(--border));
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: hsl(var(--primary-red));
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .star-rating .star {
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: color var(--transition-fast);
+        }
+
+        .star-rating .star:hover,
+        .star-rating .star.selected {
+            color: hsl(var(--heritage-gold));
+        }
+
+        .review-item, .comment-item {
+            background-color: hsl(var(--surface));
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .review-header, .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .reviewer-name, .commenter-name {
+            font-weight: 600;
+            color: hsl(var(--text-primary));
+        }
+
+        .review-date, .comment-date {
+            color: hsl(var(--text-secondary));
+            font-size: 0.875rem;
+        }
+
+        .review-actions, .comment-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: hsl(var(--text-secondary));
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+        }
+
+        .action-btn:hover {
+            color: hsl(var(--primary-red));
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: hsl(var(--text-secondary));
+        }
+
+        @media (max-width: 768px) {
+            .detail-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .detail-image {
+                order: -1;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>Nativa</h1>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#places" class="nav-link">Historical Places</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#figures" class="nav-link">Historical Figures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#timeline" class="nav-link">Timeline</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Detail Hero Section -->
+    <section class="detail-hero">
+        <div class="detail-content">
+            <div class="detail-info">
+                <a href="index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Main
+                </a>
+                <h1 id="itemTitle">Loading...</h1>
+                <div id="itemSubtitle" class="detail-subtitle"></div>
+                <div id="ratingSection" class="rating-section">
+                    <div class="stars" id="ratingStars"></div>
+                    <span id="ratingText" class="rating-text"></span>
+                </div>
+                <p id="itemDescription"></p>
+            </div>
+            <div class="detail-image">
+                <img id="itemImage" src="" alt="" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="container">
+        <div id="detailsGrid" class="details-grid">
+            <!-- Details will be populated here -->
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Reviews</h2>
+                <p class="section-subtitle">Share your experience and read what others have to say</p>
+            </div>
+
+            <!-- Review Form -->
+            <div class="review-form">
+                <h3>Write a Review</h3>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewerName">Your Name</label>
+                        <input type="text" id="reviewerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="star-rating" id="starRating">
+                            <span class="star empty" data-rating="1">★</span>
+                            <span class="star empty" data-rating="2">★</span>
+                            <span class="star empty" data-rating="3">★</span>
+                            <span class="star empty" data-rating="4">★</span>
+                            <span class="star empty" data-rating="5">★</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Your Review</label>
+                        <textarea id="reviewText" placeholder="Share your thoughts about this place or figure..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+
+            <!-- Reviews List -->
+            <div id="reviewsList">
+                <!-- Reviews will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Comments Section -->
+    <section class="comments-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Comments</h2>
+                <p class="section-subtitle">Join the discussion about this historical site or figure</p>
+            </div>
+
+            <!-- Comment Form -->
+            <div class="comment-form">
+                <h3>Add a Comment</h3>
+                <form id="commentForm">
+                    <div class="form-group">
+                        <label for="commenterName">Your Name</label>
+                        <input type="text" id="commenterName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="commentText">Your Comment</label>
+                        <textarea id="commentText" placeholder="Share your thoughts, ask questions, or add interesting facts..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                </form>
+            </div>
+
+            <!-- Comments List -->
+            <div id="commentsList">
+                <!-- Comments will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Historical Macedonia</h3>
+                    <p>Preserving and sharing the rich heritage of North Macedonia for future generations.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#places">Historical Places</a></li>
+                        <li><a href="index.html#figures">Historical Figures</a></li>
+                        <li><a href="index.html#timeline">Timeline</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Educational Resources</h4>
+                    <p>This website serves as an educational platform to learn about North Macedonia's fascinating history and cultural heritage.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Historical Macedonia. Educational content for learning purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="firebase-config.js"></script>
+    <script src="detail.js"></script>
+</body>
+</html>

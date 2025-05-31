@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nativa</title>
+    <meta name="description" content="Explore the rich history of North Macedonia through its historical places and notable figures">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>Nativa</h1>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active" data-type="home">Home</a>
+                    </li>
+                    <li class="nav-item" id="places-link">
+                        <a href="#places" class="nav-link" data-type="places-section">Historical Places</a>
+                    </li>
+                    <li class="nav-item" id="figures-link">
+                        <a href="#figures" class="nav-link" data-type="figures-section">Historical Figures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#timeline" class="nav-link" data-type="timeline-section">Timeline</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero active">
+        <div class="hero-content">
+            <h1 class="hero-title">Discover North Macedonia's Heritage</h1>
+            <div class="hero-image">
+            <img src="https://www.historyhit.com/app/uploads/2020/11/Ephesus.jpg" alt="Ancient Macedonian Architecture" loading="lazy">
+        </div>
+           
+            <div class="hero-actions">
+                <a href="#places" class="btn btn-primary">Explore Places</a>
+                <a href="#figures" class="btn btn-secondary">Meet Figures</a>
+            </div>
+             <p class="hero-subtitle">Journey through millennia of history, from ancient civilizations to modern times</p>
+        </div>
+        
+    </section>
+
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search places, figures, or historical periods...">
+                </div>
+                <div class="search-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="places">Places</button>
+                    <button class="filter-btn" data-filter="figures">Figures</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-holder">
+        <!-- Historical Places Section -->
+        <section id="places" class="places-section active">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Historical Places</h2>
+                    <p class="section-subtitle">Explore ancient sites and architectural marvels that tell the story of Macedonia</p>
+                </div>
+                <div class="places-grid" id="placesGrid">
+                    <!-- Places will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Historical Figures Section -->
+        <section id="figures" class="figures-section active">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Historical Figures</h2>
+                    <p class="section-subtitle">Meet the remarkable people who shaped Macedonian history</p>
+                </div>
+                <div class="figures-grid" id="figuresGrid">
+                    <!-- Figures will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+     <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section active">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Historical Timeline</h2>
+                <p class="section-subtitle">Journey through the ages of Macedonian history</p>
+            </div>
+            <div class="timeline" id="timeline">
+                <!-- Timeline will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for detailed information -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nativa</h3>
+                    <p>Preserving and sharing the rich heritage of North Macedonia for future generations.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#places">Historical Places</a></li>
+                        <li><a href="#figures">Historical Figures</a></li>
+                        <li><a href="#timeline">Timeline</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Educational Resources</h4>
+                    <p>This website serves as an educational platform to learn about North Macedonia's fascinating history and cultural heritage.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nativa. Educational content for learning purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
